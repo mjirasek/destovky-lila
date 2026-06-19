@@ -1,0 +1,144 @@
+.hook__filters {
+  padding: $block-gap 1.5em;
+  background: $m-bg--fade-50;
+  height: 100%;
+  white-space: nowrap;
+  display: block;
+
+  td {
+    padding: 1em 0;
+  }
+
+  td:first-child {
+    font-size: 1.1em;
+    padding-inline-end: 2rem;
+    width: 25%;
+    white-space: normal;
+  }
+
+  .checkable {
+    @extend %nowrap-ellipsis;
+
+    padding: 4px 2px 4px 0;
+
+    label {
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+      cursor: pointer;
+    }
+
+    input {
+      cursor: pointer;
+    }
+  }
+
+  .regular-checkbox {
+    @extend %checkbox;
+
+    position: relative;
+    border-radius: calc($box-radius-size / 2);
+
+    &:hover {
+      border-color: $c-border-light;
+    }
+
+    &:checked {
+      &:hover {
+        border-color: $c-good;
+      }
+
+      &::after {
+        border: 1.5px solid #fff;
+        border-top: none;
+        border-right: none;
+        content: '';
+        width: 8px;
+        height: 4.5px;
+        left: 50%;
+        top: 50%;
+        position: absolute;
+        transform: translate(-50%, -62%) rotate(-45deg);
+      }
+    }
+  }
+
+  tr.variant td:last-child {
+    display: flex;
+    flex-flow: row wrap;
+  }
+
+  tr.variant .checkable {
+    width: 33.3%;
+  }
+
+  tr.inline .checkable {
+    display: inline-block;
+    padding: 6px 20px 2px 0;
+  }
+
+  input {
+    margin-inline-end: 0.3em;
+  }
+
+  .range {
+    display: grid;
+    grid-template-columns: 1fr 20px 1fr;
+    gap: 2px;
+    justify-content: center;
+
+    span {
+      color: $c-font-dim;
+      text-align: center;
+
+      &:first-child {
+        color: unset;
+        text-align: right;
+      }
+
+      &:last-child {
+        color: unset;
+        text-align: left;
+      }
+    }
+  }
+
+  .rating-range {
+    @extend %flex-center-nowrap;
+
+    color: $c-font-dim;
+    justify-content: center;
+
+    input {
+      padding: 0.6em 0;
+      margin: 0 1ch;
+
+      @media (max-width: at-most($xx-small)) {
+        width: 26vw;
+      }
+    }
+  }
+
+  .actions {
+    display: flex;
+    gap: 6px;
+    margin-top: 1.5em;
+    justify-content: end;
+  }
+
+  @media (max-width: at-most($xx-small)) {
+    padding: $block-gap 1em;
+
+    td {
+      max-width: 50vw;
+    }
+
+    td:first-child {
+      margin-inline-end: 1rem;
+    }
+
+    tr.variant .checkable {
+      width: 50%;
+    }
+  }
+}

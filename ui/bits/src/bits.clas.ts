@@ -1,0 +1,59 @@
+import { Textcomplete } from '@textcomplete/core';
+import { TextareaEditor } from '@textcomplete/textarea';
+
+import { sortTable, extendTablesortNumber } from 'lib/tablesort';
+import type { UserCompleteResult } from 'lib/view/userComplete';
+import * as xhr from 'lib/xhr';
+
+site.load.then(() => {
+  $('table.sortable').each(function (this: HTMLTableElement) {
+    sortTable(this, {
+      descending: false,
+    });
+  });
+  $('.name-regen').on('click', function (this: HTMLAnchorElement) {
+    xhr.text(this.href).then(name => $('#form3-create-username').val(name));
+    return false;
+  });
+
+  $('#form3-teachers').each(function (this: HTMLTextAreaElement) {
+    const textarea = this;
+
+    function currentUserIds() {
+      return textarea.value.split('\n').slice(0, -1);
+    }
+    new Textcomplete(new TextareaEditor(textarea), [
+      {
+        id: 'teacher',
+        match: /(^|\s)(.+)$/,
+        index: 2,
+        search(term: string, searchCallback: (res: any[]) => void) {
+          if (term.length < 3) searchCallback([]);
+          else
+            xhr.json(xhr.url('/api/player/autocomplete', { object: 1, teacher: 1, term })).then(
+              (res: UserCompleteResult) => {
+                const current = currentUserIds();
+                searchCallback(res.result.filter(t => !current.includes(t.id)));
+              },
+              _ => searchCallback([]),
+            );
+        },
+        template: (o: LightUserOnline) =>
+          '<span class="ulpt user-link' +
+          (o.online ? ' online' : '') +
+          '" data-href="/@/' +
+          o.name +
+          '">' +
+          '<icon class="line' +
+          (o.patron ? ' patron' : '') +
+          '"></icon>' +
+          (o.title ? '<span class="utitle">' + o.title + '</span>&nbsp;' : '') +
+          o.name +
+          '</span>',
+        replace: (o: LightUserOnline) => '$1' + o.name + '\n',
+      },
+    ]);
+  });
+
+  extendTablesortNumber();
+});

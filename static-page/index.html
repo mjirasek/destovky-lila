@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Destovky Lila</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: #161512;
+        color: #d8d3ca;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        background: #161512;
+      }
+
+      main {
+        width: min(900px, calc(100vw - 32px));
+        display: grid;
+        grid-template-columns: 1fr 300px;
+        gap: 18px;
+      }
+
+      section,
+      aside {
+        background: #262421;
+        border: 1px solid #3f3b35;
+        border-radius: 3px;
+        box-shadow: 0 8px 28px rgba(0, 0, 0, 0.32);
+        padding: 22px;
+      }
+
+      h1 {
+        margin: 0 0 10px;
+        font-size: 34px;
+        letter-spacing: 0;
+        line-height: 1;
+      }
+
+      p {
+        color: #aaa39a;
+        line-height: 1.5;
+        margin: 0 0 14px;
+      }
+
+      .tag {
+        display: inline-flex;
+        width: fit-content;
+        padding: 5px 8px;
+        border-radius: 3px;
+        background: #1b1917;
+        border: 1px solid #3f3b35;
+        color: #8fa75a;
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+
+      .stack {
+        display: grid;
+        gap: 10px;
+      }
+
+      .row {
+        display: grid;
+        grid-template-columns: 92px 1fr;
+        gap: 12px;
+        color: #cfc7bd;
+        font-size: 13px;
+      }
+
+      .row strong {
+        color: #8fa75a;
+      }
+
+      a {
+        color: #b7d18a;
+      }
+
+      @media (max-width: 720px) {
+        main {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section>
+        <span class="tag">Trimmed Lila fork</span>
+        <h1>Destovky Lila</h1>
+        <p>
+          This repository contains a trimmed copy of the Lichess/Lila codebase for experimenting
+          with Lila-style accounts, lobby, challenges, and game infrastructure for Destovky.
+        </p>
+        <p>
+          Heavy optional assets such as NNUE files, speech models, and background gallery files
+          are intentionally omitted. The real application is still a Scala/Play server and is not
+          hosted by GitHub Pages.
+        </p>
+        <p>
+          Source:
+          <a href="https://github.com/mjirasek/destovky-lila">github.com/mjirasek/destovky-lila</a>
+        </p>
+      </section>
+      <aside class="stack">
+        <div class="row"><strong>Base</strong><span>lichess-org/lila @ dd019da</span></div>
+        <div class="row"><strong>Removed</strong><span>public/lifat/nnue, vosk, background gallery</span></div>
+        <div class="row"><strong>License</strong><span>AGPL-3.0-or-later</span></div>
+        <div class="row"><strong>Next</strong><span>Run Lila locally, then identify rule-engine boundaries.</span></div>
+      </aside>
+    </main>
+  </body>
+</html>
